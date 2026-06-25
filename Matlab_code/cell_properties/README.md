@@ -1,0 +1,39 @@
+# Cell Properties
+
+This folder contains the cell-level properties required before running the GMM classifier.
+
+Run all three:
+
+```matlab
+compute_gmm_cell_properties()
+```
+
+Pipeline order:
+
+1. `compute_spatial_coverage_for_classification.m`
+   - Reads existing `processedData/PlaceMap/of*_Map.mat` files.
+   - Computes `spatial_coverage_of1`, `spatial_coverage_of2`, etc.
+   - Writes `spatial_coverage_meanOFs`.
+
+2. `compute_acg_mean_for_classification.m`
+   - Reads open-field spike times.
+   - Computes `acg_mean` from the positive-lag narrow autocorrelogram.
+
+3. `compute_classification_firing_rate.m`
+   - Reads open-field and sleep spike times.
+   - Computes `classific_firingRate` as total spikes divided by total recording duration.
+
+SWR metrics:
+
+4. `compute_swr_cell_metrics.m`
+   - Reads sleep spike times and existing SWR detection files.
+   - Writes `S1_*` and `S2_*` per-cell SWR fields to `All_Cells_combined`.
+   - Uses the settled names `PSP`, `SFI`, and `SpPR`:
+     - `S1_PSP`, `S2_PSP`: percent of SWR participation.
+     - `S1_SFI`, `S2_SFI`: sharp-wave ripple firing-rate increase.
+     - `S1_SpPR`, `S2_SpPR`: spikes per participated ripple.
+   - Also writes `S1_SSMI`, `S2_SSMI`, `S1_longPSP`, `S2_longPSP`, `S1_SRR`, `S2_SRR`, and SWR modulation/timing fields.
+
+`computeSpatialCoverage.m`, `writeSpatialCoverageToAllCells.m`, and `CrossCorrel.m` are reusable helpers.
+
+The spike-reading functions come from the local MClust/cluster-cutting setup. Store that path in `../classification/classification_config.json`.

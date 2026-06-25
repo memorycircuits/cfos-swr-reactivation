@@ -473,12 +473,12 @@ function T = flatten_cells_for_salt(All_Cells_combined, saltPBySession, principa
     SALTPValue = [];
     S1_SSMI = [];
     S1_SFI = [];
-    S1_SPP = [];
-    S1_SMRpR = [];
+    S1_PSP = [];
+    S1_SpPR = [];
     S2_SSMI = [];
     S2_SFI = [];
-    S2_SPP = [];
-    S2_SMRpR = [];
+    S2_PSP = [];
+    S2_SpPR = [];
     BurstIndex = [];
     SpeedScore = [];
     PeakRate = [];
@@ -546,12 +546,12 @@ function T = flatten_cells_for_salt(All_Cells_combined, saltPBySession, principa
         iNumber = get_field_or_empty(All_Cells_combined(s), 'i_number');
         s1_ssmi = get_field_or_empty(All_Cells_combined(s), 'S1_SSMI');
         s1_sfi = get_field_or_empty(All_Cells_combined(s), 'S1_SFI');
-        s1_spp = get_field_or_empty(All_Cells_combined(s), 'S1_SPP');
-        s1_smrpr = get_field_or_empty(All_Cells_combined(s), 'S1_SMRpR');
+        s1_psp = get_field_or_empty(All_Cells_combined(s), 'S1_PSP');
+        s1_sppr = get_field_or_empty(All_Cells_combined(s), 'S1_SpPR');
         s2_ssmi = get_field_or_empty(All_Cells_combined(s), 'S2_SSMI');
         s2_sfi = get_field_or_empty(All_Cells_combined(s), 'S2_SFI');
-        s2_spp = get_field_or_empty(All_Cells_combined(s), 'S2_SPP');
-        s2_smrpr = get_field_or_empty(All_Cells_combined(s), 'S2_SMRpR');
+        s2_psp = get_field_or_empty(All_Cells_combined(s), 'S2_PSP');
+        s2_sppr = get_field_or_empty(All_Cells_combined(s), 'S2_SpPR');
         room = get_field_or_empty(All_Cells_combined(s), 'room_ID');
         burst = get_field_or_empty(All_Cells_combined(s), 'of_avg_burst_indices');
         speedScore = get_field_or_empty(All_Cells_combined(s), 'of_avg_speedScore');
@@ -634,8 +634,8 @@ function T = flatten_cells_for_salt(All_Cells_combined, saltPBySession, principa
         end
 
         nCells = max([numel(bm), numel(rel), numel(lat), numel(jit), numel(cls), numel(salt), ...
-            numel(s1_ssmi), numel(s1_sfi), numel(s1_spp), numel(s1_smrpr), ...
-            numel(s2_ssmi), numel(s2_sfi), numel(s2_spp), numel(s2_smrpr), ...
+            numel(s1_ssmi), numel(s1_sfi), numel(s1_psp), numel(s1_sppr), ...
+            numel(s2_ssmi), numel(s2_sfi), numel(s2_psp), numel(s2_sppr), ...
             numel(room), numel(burst), numel(speedScore), numel(peakRate), numel(avgRate), numel(avgRateOF), ...
             numel(avgRate1), numel(avgRate2), numel(avgRate3), ...
             numel(peakRate1), numel(peakRate2), numel(peakRate3), ...
@@ -725,12 +725,12 @@ function T = flatten_cells_for_salt(All_Cells_combined, saltPBySession, principa
         intrinsic_frequency3_pad = nan(nCells, 1);
         s1_ssmi_pad = nan(nCells, 1);
         s1_sfi_pad = nan(nCells, 1);
-        s1_spp_pad = nan(nCells, 1);
-        s1_smrpr_pad = nan(nCells, 1);
+        s1_psp_pad = nan(nCells, 1);
+        s1_sppr_pad = nan(nCells, 1);
         s2_ssmi_pad = nan(nCells, 1);
         s2_sfi_pad = nan(nCells, 1);
-        s2_spp_pad = nan(nCells, 1);
-        s2_smrpr_pad = nan(nCells, 1);
+        s2_psp_pad = nan(nCells, 1);
+        s2_sppr_pad = nan(nCells, 1);
         cls_pad = repmat("unknown", nCells, 1);
         animal_pad = repmat("", nCells, 1);
         room_group_pad = repmat("unknown", nCells, 1);
@@ -803,12 +803,12 @@ function T = flatten_cells_for_salt(All_Cells_combined, saltPBySession, principa
         if ~isempty(intrinsicFrequency3), intrinsic_frequency3_pad(1:numel(intrinsicFrequency3)) = intrinsicFrequency3(:); end
         if ~isempty(s1_ssmi), s1_ssmi_pad(1:numel(s1_ssmi)) = s1_ssmi(:); end
         if ~isempty(s1_sfi), s1_sfi_pad(1:numel(s1_sfi)) = s1_sfi(:); end
-        if ~isempty(s1_spp), s1_spp_pad(1:numel(s1_spp)) = s1_spp(:); end
-        if ~isempty(s1_smrpr), s1_smrpr_pad(1:numel(s1_smrpr)) = s1_smrpr(:); end
+        if ~isempty(s1_psp), s1_psp_pad(1:numel(s1_psp)) = s1_psp(:); end
+        if ~isempty(s1_sppr), s1_sppr_pad(1:numel(s1_sppr)) = s1_sppr(:); end
         if ~isempty(s2_ssmi), s2_ssmi_pad(1:numel(s2_ssmi)) = s2_ssmi(:); end
         if ~isempty(s2_sfi), s2_sfi_pad(1:numel(s2_sfi)) = s2_sfi(:); end
-        if ~isempty(s2_spp), s2_spp_pad(1:numel(s2_spp)) = s2_spp(:); end
-        if ~isempty(s2_smrpr), s2_smrpr_pad(1:numel(s2_smrpr)) = s2_smrpr(:); end
+        if ~isempty(s2_psp), s2_psp_pad(1:numel(s2_psp)) = s2_psp(:); end
+        if ~isempty(s2_sppr), s2_sppr_pad(1:numel(s2_sppr)) = s2_sppr(:); end
         if ~isempty(iNumber)
             iValues = double(iNumber(:));
             i_pad(1:min(numel(iValues), nCells)) = iValues(1:min(numel(iValues), nCells));
@@ -864,12 +864,12 @@ function T = flatten_cells_for_salt(All_Cells_combined, saltPBySession, principa
         SALTPValue = [SALTPValue; salt_pad]; %#ok<AGROW>
         S1_SSMI = [S1_SSMI; s1_ssmi_pad]; %#ok<AGROW>
         S1_SFI = [S1_SFI; s1_sfi_pad]; %#ok<AGROW>
-        S1_SPP = [S1_SPP; s1_spp_pad]; %#ok<AGROW>
-        S1_SMRpR = [S1_SMRpR; s1_smrpr_pad]; %#ok<AGROW>
+        S1_PSP = [S1_PSP; s1_psp_pad]; %#ok<AGROW>
+        S1_SpPR = [S1_SpPR; s1_sppr_pad]; %#ok<AGROW>
         S2_SSMI = [S2_SSMI; s2_ssmi_pad]; %#ok<AGROW>
         S2_SFI = [S2_SFI; s2_sfi_pad]; %#ok<AGROW>
-        S2_SPP = [S2_SPP; s2_spp_pad]; %#ok<AGROW>
-        S2_SMRpR = [S2_SMRpR; s2_smrpr_pad]; %#ok<AGROW>
+        S2_PSP = [S2_PSP; s2_psp_pad]; %#ok<AGROW>
+        S2_SpPR = [S2_SpPR; s2_sppr_pad]; %#ok<AGROW>
         BurstIndex = [BurstIndex; burst_pad]; %#ok<AGROW>
         SpeedScore = [SpeedScore; speed_score_pad]; %#ok<AGROW>
         PeakRate = [PeakRate; peak_rate_pad]; %#ok<AGROW>
@@ -929,8 +929,8 @@ function T = flatten_cells_for_salt(All_Cells_combined, saltPBySession, principa
     end
 
     T = table(SessionIndex, INumber, Cell, CellClass, AnimalID, RoomID, RoomName, RoomGroup, BaselineSD, Reliability, ...
-        Latency_ms, Jitter_ms, SALTPValue, S1_SSMI, S1_SFI, S1_SPP, S1_SMRpR, ...
-        S2_SSMI, S2_SFI, S2_SPP, S2_SMRpR, ...
+        Latency_ms, Jitter_ms, SALTPValue, S1_SSMI, S1_SFI, S1_PSP, S1_SpPR, ...
+        S2_SSMI, S2_SFI, S2_PSP, S2_SpPR, ...
         BurstIndex, SpeedScore, PeakRate, TemporalPeakRate, ...
         AverageRate, AverageRate_OF1, AverageRate_OF2, AverageRate_OF3, ...
         PlaceFieldSize, SpatialInfo_A, SpatialPeakRate, ...

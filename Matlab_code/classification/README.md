@@ -21,6 +21,7 @@ Pipeline order:
    - Trains and applies the principal/interneuron GMM using CCG-based ground truth labels.
    - The current feature set is spatial coverage, ACG mean, and classification firing rate.
    - Writes `All_Cells_combined.GMM_based_classification_days`.
+   - Requires `spatial_coverage_meanOFs`, `acg_mean`, and `classific_firingRate` from `../cell_properties`.
 
 5. `Classifications_Spatial_Info.m`
    - Combines `GMM_based_classification_days` with place-field outputs.
