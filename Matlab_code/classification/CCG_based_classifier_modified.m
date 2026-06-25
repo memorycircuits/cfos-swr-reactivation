@@ -10,6 +10,10 @@ add_repo_matlab_code_path();
 add_configured_dependency_paths(config, custom_settings);
 
 make_plots = logical(get_override_value(custom_settings, 'makePlots', true));
+cell_pairs_root = char(string(get_override_value(custom_settings, 'cellPairsRoot', '')));
+if isempty(cell_pairs_root)
+    cell_pairs_root = default_cell_pairs_root();
+end
 
 sessionInfoPath = char(string(get_override_value(custom_settings, 'sessionInfoPath', '')));
 if isempty(sessionInfoPath)
@@ -472,12 +476,12 @@ processed_session_count = processed_session_count + 1;
 
 cell_classification_plot = cell_classification;
 
-%% GUI for manual curation
-%gui_MonoSyn(mono_res_excitatory) % Shows the GUI for manual curation
+%% Manual curation
+% review_CCG_connection_labels handles saved review sessions after generation.
 
 %% Plot some strongly connected cross-correlograms
 if make_plots ==1
-outfolder = ('W:\Haseeb\Pictures\CellPairs');
+outfolder = cell_pairs_root;
 if ~exist(outfolder, 'dir')
     mkdir(outfolder)
 end
@@ -851,6 +855,12 @@ function reviewRoot = default_review_root()
 
 repoRoot = fullfile(fileparts(mfilename('fullpath')), '..', '..');
 reviewRoot = fullfile(repoRoot, 'Data', 'CCG_review_sessions');
+end
+
+function cellPairsRoot = default_cell_pairs_root()
+
+repoRoot = fullfile(fileparts(mfilename('fullpath')), '..', '..');
+cellPairsRoot = fullfile(repoRoot, 'Results', 'CellPairs');
 end
 
 function pathOut = first_existing_file(candidatePaths)
