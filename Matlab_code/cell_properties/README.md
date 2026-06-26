@@ -36,6 +36,16 @@ SWR metrics:
 
 The default SWR event file expected by `compute_swr_cell_metrics.m` is `_allE_numSD3.5_HighPwrCycles4.mat`.
 
+Place-cell reuse:
+
+5. `compute_place_cell_reuse_metrics.m`
+   - Reads the place-cell context code from `place_cell_OF_combinations_code` or falls back to `of*_place_field_numbers`.
+   - Writes `context_A_place_cell`, `context_B_place_cell`, `context_A_revisit_place_cell`, and pairwise `place_cell_reuse_*` flags.
+   - Computes Dice overlap for Context A vs Context B, Context B vs Context A revisit, and Context A vs Context A revisit:
+     - `Dice_value = 2 * cells_in_both / (cells_in_context_1 + cells_in_context_2)`.
+     - `Dice_percent = 100 * Dice_value`.
+   - Stores the summary table in `place_cell_reuse_dice_summary` and, by default, writes `processedData/PlaceCellReuse/place_cell_reuse_metrics.mat` plus a CSV summary for each session.
+
 `computeSpatialCoverage.m`, `writeSpatialCoverageToAllCells.m`, and `CrossCorrel.m` are reusable helpers.
 
 The spike-reading functions come from the local MClust/cluster-cutting setup. Store that path in `../classification/classification_config.json`.
