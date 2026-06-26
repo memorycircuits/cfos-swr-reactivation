@@ -15,12 +15,12 @@ The study focuses on both excitatory and inhibitory components of a cFos-tagged 
 ## Lab
 
 This work was carried out in the Memory Circuits Lab. <br> <br>
+<img src="lab/memorycircuits_lab_logo.png" alt="Memory Circuits Lab logo" width="250"/> <br>
 
-German Center for Neurodegenerative Diseases <br>
-Charité – Universitätsmedizin Berlin <br>
+At the German Center for Neurodegenerative Diseases  (DZNE) <br>
+and  <br>
+Charité - Universitätsmedizin Berlin <br>
 Berlin, Germany <br>
-
-<img src="lab/memorycircuits_lab_logo.png" alt="Memory Circuits Lab logo" width="250"/>
 
 ## Contact
 
@@ -33,8 +33,8 @@ Berlin, Germany <br> <br>
 
 or  <br>
 Matthias Haberl <br>
-Charite Universitaetsmedizin Berlin <br>
-Germany <br>
+Charité - Universitätsmedizin Berlin <br>
+Berlin, Germany <br>
 
 
 ## License
