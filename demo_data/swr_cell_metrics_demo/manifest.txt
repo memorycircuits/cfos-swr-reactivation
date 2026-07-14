@@ -1,0 +1,11 @@
+SWR cell-metrics demo manifest
+Source session index: 12
+Sleep folder: s1
+CSC channel: 3
+Selected unit indices: [1 2 3 4 5 6 7 8 9 10 11]
+Selected unit files: TT1_01.t, TT2_01.t, TT3_01.t, TT3_02.t, TT3_03.t, TT3_04.t, TT3_05.t, TT3_06.t, TT3_07.t, TT3_08.t, TT3_09.t
+Slow event count: 92
+First slow-event start: 1674728287.29
+Last slow-event stop: 1674728825.29
+CSC size: 38.46 MB
+Output folder: swr_cell_metrics_demo

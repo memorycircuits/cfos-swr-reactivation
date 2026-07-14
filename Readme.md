@@ -30,6 +30,10 @@ addpath(genpath('/path/to/cfos-swr-reactivation/Matlab_code'))
 
 The MATLAB-path setup takes less than one minute. Once MATLAB and the third-party dependencies are already installed, configuration normally takes less than 10 minutes; installing external dependencies may take longer.
 
+## Demo data
+
+The [`demo_data`](demo_data/README.md) folder documents how to run the packaged SWR cell-metrics example. It calculates per-cell SWR participation, firing-rate increase, and spikes-per-ripple fields from a small real sleep-session subset with precomputed SWR events.
+
 ## Running the analyses
 
 The electrophysiology analyses use a `sessionInfo.mat` file containing `sessInfo` and an `All_Cells_combined.mat` file. Pass both locations explicitly when they are not in the repository root or `Data` folder:
