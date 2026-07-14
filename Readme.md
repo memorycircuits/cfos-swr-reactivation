@@ -7,6 +7,97 @@ In this project, we combined cFos-dependent tagging, chronic in vivo electrophys
 
 The study focuses on both excitatory and inhibitory components of a cFos-tagged spatial ensemble, including cFos-tagged place cells, non-place principal cells, and interneurons.
 
+## System requirements
+
+The source code is written in MATLAB. It was tested with a MATLAB 2023 release.
+
+- **MATLAB:** MATLAB R2023 (tested).
+- **MATLAB toolboxes:** Signal Processing Toolbox and Statistics and Machine Learning Toolbox.
+- **Third-party MATLAB dependencies:** MClust/Neuralynx readers, CellExplorer (for CCG classification), the `detectHFOs` package, and `findpeaksmine`. The oscillation, cell-property, and classification scripts identify the dependency they use in their corresponding folder README files.
+- **Operating system:** The code is intended for standard desktop operating systems supported by MATLAB. The operating-system version used for testing was not recorded for this repository release.
+- **Hardware:** No non-standard hardware is required to run the analyses. Memory and storage requirements depend on the size of the electrophysiology recordings.
+
+## Installation
+
+1. Download or clone this repository.
+2. Install MATLAB R2023 and the required toolboxes.
+3. Install the third-party dependencies listed above and record their local paths in [`Matlab_code/classification/classification_config.json`](Matlab_code/classification/classification_config.json). At minimum, configure `cellExplorerPath` and `mclustPath`; pass the `detectHFOs` and `findpeaksmine` folders through the `additionalPaths` setting when running oscillation analyses.
+4. Start MATLAB and add the repository code to the MATLAB path:
+
+```matlab
+addpath(genpath('/path/to/cfos-swr-reactivation/Matlab_code'))
+```
+
+The MATLAB-path setup takes less than one minute. Once MATLAB and the third-party dependencies are already installed, configuration normally takes less than 10 minutes; installing external dependencies may take longer.
+
+## Running the analyses
+
+The electrophysiology analyses use a `sessionInfo.mat` file containing `sessInfo` and an `All_Cells_combined.mat` file. Pass both locations explicitly when they are not in the repository root or `Data` folder:
+
+```matlab
+settings = struct( ...
+    'sessionInfoPath', '/path/to/sessionInfo.mat', ...
+    'allCellsPath', '/path/to/All_Cells_combined.mat');
+```
+
+### Sharp-wave ripple and phase analyses
+
+Run SWR detection first, followed by the desired cell-level analyses:
+
+```matlab
+detect_swr_events(settings)
+compute_swr_cell_metrics(settings)
+compute_swr_phase_analysis(settings)
+```
+
+For open-field theta-phase encoding, run:
+
+```matlab
+compute_open_field_theta_phase_encoding( ...
+    'sessionInfoPath', settings.sessionInfoPath, ...
+    'allCellsPath', settings.allCellsPath)
+```
+
+See [`Matlab_code/oscillations/README.md`](Matlab_code/oscillations/README.md) for required session files, output filenames, and optional settings.
+
+### Cell classification and place-cell metrics
+
+Compute the GMM features before running the GMM classifier:
+
+```matlab
+compute_gmm_cell_properties(settings)
+GMM_based_classifications(settings)
+Classifications_Spatial_Info(settings)
+compute_place_cell_reuse_metrics(settings)
+```
+
+The GMM classifier requires curated CCG ground-truth labels. To generate and review these labels, run `CCG_based_classifier_modified(settings)`, curate the generated review sessions with `review_CCG_connection_labels`, and then run `rebuild_All_Cells_combined_CCG_classification_from_curated`. The complete sequence is described in [`Matlab_code/classification/README.md`](Matlab_code/classification/README.md).
+
+### Optotagging and CSV exports
+
+Run the SALT optotagging analysis before exporting its summaries:
+
+```matlab
+SALT_opto_analysis(settings)
+CSV_file_export_first(settings)
+```
+
+### Image quantification
+
+Provide the path to the quantification workbook and an output folder:
+
+```matlab
+plot_CB_quantification_figures( ...
+    '/path/to/Quantifications.xlsx', ...
+    'OutputFolder', '/path/to/output/CB')
+
+plot_interneuron_quantification_figures( ...
+    '/path/to/Quantifications.xlsx', ...
+    'OutputFolder', '/path/to/output/interneurons')
+```
+
+The figure functions write figures and summary tables to their specified output folders. The cell-property workflow and its input expectations are documented in [`Matlab_code/cell_properties/README.md`](Matlab_code/cell_properties/README.md).
+
 ## Preprint
 
 **bioRxiv**: https://www.biorxiv.org/content/10.1101/2024.12.17.628897
