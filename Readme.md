@@ -13,8 +13,8 @@ The source code is written in MATLAB. It was tested with a MATLAB 2023 release.
 
 - **MATLAB:** MATLAB R2023 (tested).
 - **MATLAB toolboxes:** Signal Processing Toolbox and Statistics and Machine Learning Toolbox.
-- **Third-party MATLAB dependencies:** MClust/Neuralynx readers, CellExplorer (for CCG classification), the `detectHFOs` package, and `findpeaksmine`. The oscillation, cell-property, and classification scripts identify the dependency they use in their corresponding folder README files.
-- **Operating system:** The code is intended for standard desktop operating systems supported by MATLAB. The operating-system version used for testing was not recorded for this repository release.
+- **Third-party MATLAB dependencies:** MClust/Neuralynx readers and CellExplorer (for CCG classification).
+- **Operating system:** The code is intended for standard desktop operating systems supported by MATLAB.
 - **Hardware:** No non-standard hardware is required to run the analyses. Memory and storage requirements depend on the size of the electrophysiology recordings.
 
 ## Installation
