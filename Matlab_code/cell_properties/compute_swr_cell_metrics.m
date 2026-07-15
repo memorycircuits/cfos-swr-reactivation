@@ -469,12 +469,8 @@ function lfp = load_sleep_lfp(main_dir, sleep_label, channel)
 
 eeg_file = fullfile(main_dir, sleep_label, strcat('CSC', num2str(channel), '.ncs'));
 fprintf('Reading: %s\n', eeg_file);
-[eeg, sample_frequency] = readCRTsd(eeg_file);
-lfp.samp = Data(eeg) * -1;
-lfp.samp = downsample(lfp.samp, 16);
-lfp.ts = Range(eeg);
-lfp.ts = downsample(lfp.ts, 16);
-lfp.sampFreq = sample_frequency / 16;
+[lfp.ts, lfp.samp, lfp.sampFreq] = data_IO.read_ncs_downsampled(eeg_file, 16);
+lfp.samp = lfp.samp * -1;
 end
 
 function [eeg_ts, eeg_raw] = align_lfp_with_indata(tracking_time, eeg_ts, eeg_raw)
@@ -535,8 +531,7 @@ if exist(session_dir, 'dir') ~= 7
 end
 
 try
-    spike_data = readSpikeDataOnly(session_dir, tt_files);
-    spike_times = fixSpikes(spike_data);
+    spike_times = data_IO.read_t_file_times(session_dir, tt_files);
 catch ME
     warning('Could not read spikes from %s: %s', session_dir, ME.message);
     return

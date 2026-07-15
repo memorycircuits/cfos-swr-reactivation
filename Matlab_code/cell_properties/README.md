@@ -48,4 +48,4 @@ Place-cell reuse:
 
 `computeSpatialCoverage.m`, `writeSpatialCoverageToAllCells.m`, and `CrossCorrel.m` are reusable helpers.
 
-The spike-reading functions come from the local MClust/cluster-cutting setup. Store that path in `../classification/classification_config.json`.
+`compute_swr_cell_metrics.m` uses the bundled `+data_IO` readers for Neuralynx CSC files and sorted T files, so its demo workflow does not require MClust. Other cell-property workflows that read raw spike data may still use the local MClust/cluster-cutting setup; store that path in `../classification/classification_config.json`.

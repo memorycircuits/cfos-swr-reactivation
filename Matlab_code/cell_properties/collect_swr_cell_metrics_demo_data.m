@@ -155,7 +155,7 @@ manifest.indata_start = indata(1).t(1);
 manifest.indata_stop = indata(1).t(end);
 manifest.csc_size_bytes = csc_info.bytes;
 manifest.output_folder = 'swr_cell_metrics_demo';
-manifest.required_runtime_dependencies = {'MATLAB Signal Processing Toolbox', 'MClust/Neuralynx readers'};
+manifest.required_runtime_dependencies = {'MATLAB Signal Processing Toolbox'};
 save(fullfile(demo_root, 'manifest.mat'), 'manifest', '-v7');
 write_manifest_text(fullfile(demo_root, 'manifest.txt'), manifest);
 
